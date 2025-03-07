@@ -60,7 +60,7 @@ public class FarmKG extends Artifact {
          * [{"farm":
          *  {
          *   "type":"uri",
-         *   "value":"https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-danai#farm-17c04810-567a-4236-b310-611bb4fd2a8c"
+         *   "value":"https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#farm-17c04810-567a-4236-b310-611bb4fd2a8c"
          *  }
          * }]
          */
@@ -95,7 +95,7 @@ public class FarmKG extends Artifact {
          * PREFIX hmas: <https://purl.org/hmas/>
          * PREFIX td: <https://www.w3.org/2019/wot/td#>
          * SELECT ?td WHERE {
-         *   <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-danai#farm-17c04810-567a-4236-b310-611bb4fd2a8c> hmas:contains ?thing.
+         *   <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#farm-17c04810-567a-4236-b310-611bb4fd2a8c> hmas:contains ?thing.
          *   ?thing td:hasActionAffordance ?aff.
          *   ?thing hmas:hasProfile ?td.
          *   ?aff a <https://was-course.interactions.ics.unisg.ch/farm-ontology#ReadSoilMoistureAffordance>.
