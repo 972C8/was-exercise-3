@@ -1,0 +1,14 @@
+PREFIX was: <https://was-course.interactions.ics.unisg.ch/farm-ontology#>
+PREFIX td: <https://www.w3.org/2019/wot/td#>
+
+SELECT ?x1 ?y1 ?x2 ?y2 WHERE {
+GRAPH <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#> {
+   bind (<https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#section_02a2b3ac_8934_407b_a032_bccb401ca816> as ?section)
+   ?section a was:Section.
+   ?section was:isLocatedAt ?coordinates.
+   ?coordinates was:x1 ?x1.
+   ?coordinates was:y1 ?y1.
+   ?coordinates was:x2 ?x2.
+   ?coordinates was:y2 ?y2.
+ }
+}

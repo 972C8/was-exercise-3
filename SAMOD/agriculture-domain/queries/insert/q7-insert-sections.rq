@@ -1,0 +1,68 @@
+PREFIX was: <https://was-course.interactions.ics.unisg.ch/farm-ontology#>
+PREFIX hmas: <https://purl.org/hmas/>
+PREFIX td: <https://www.w3.org/2019/wot/td#>
+
+INSERT {
+    GRAPH <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#>
+    {
+        ?section1 a was:Section, td:Thing;
+				td:title "A section of the farm";
+				td:hasBase <http://localhost:1080/api/sections/1/>;
+				was:isLocatedAt ?coordinates1;
+       		was:grows ?wheat;
+				was:hasSoilMoisture ?moisture1.
+
+        ?section2 a was:Section, td:Thing;
+				td:title "A section of the farm";
+				td:hasBase <http://localhost:1080/api/sections/2/>;
+				was:isLocatedAt ?coordinates2;
+				was:grows ?wheat;
+				was:hasSoilMoisture ?moisture2.
+
+        ?section3 a was:Section, td:Thing;
+				td:title "A section of the farm";
+				td:hasBase <http://localhost:1080/api/sections/3/>;
+				was:isLocatedAt ?coordinates3;
+				was:grows ?corn;
+				was:hasSoilMoisture ?moisture3.
+				
+        ?section4 a was:Section, td:Thing;
+				td:title "A section of the farm";
+				td:hasBase <http://localhost:1080/api/sections/4/>;
+				was:isLocatedAt ?coordinates4;
+            was:grows ?corn;
+				was:hasSoilMoisture ?moisture4.
+
+        ?farm hmas:contains ?section1.
+        ?farm hmas:contains ?section2.
+        ?farm hmas:contains ?section3.
+        ?farm hmas:contains ?section4.
+    }.
+} WHERE {
+	?farm a was:Farm.
+	?wheat a was:Wheat.
+	?corn a was:Corn.
+
+	?coordinates1 a was:Coordinates.
+	?coordinates1 td:hasBase <http://localhost:1080/api/coordinates/1/>.
+	?coordinates2 a was:Coordinates.
+	?coordinates2 td:hasBase <http://localhost:1080/api/coordinates/2/>.
+	?coordinates3 a was:Coordinates.
+	?coordinates3 td:hasBase <http://localhost:1080/api/coordinates/3/>.
+	?coordinates4 a was:Coordinates.
+	?coordinates4 td:hasBase <http://localhost:1080/api/coordinates/4/>.
+
+	?moisture1 a was:SoilMoisture.
+	?moisture1 td:hasBase <http://localhost:1080/api/soilMoisture/1/>.
+	?moisture2 a was:SoilMoisture.
+	?moisture2 td:hasBase <http://localhost:1080/api/soilMoisture/2/>.
+	?moisture3 a was:SoilMoisture.
+	?moisture3 td:hasBase <http://localhost:1080/api/soilMoisture/3/>.
+	?moisture4 a was:SoilMoisture.
+	?moisture4 td:hasBase <http://localhost:1080/api/soilMoisture/4/>.
+
+  	BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#section-", strUUID())) AS ?section1)
+  	BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#section-", strUUID())) AS ?section2)
+  	BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#section-", strUUID())) AS ?section3)
+  	BIND(IRI(CONCAT("https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#section-", strUUID())) AS ?section4)
+}

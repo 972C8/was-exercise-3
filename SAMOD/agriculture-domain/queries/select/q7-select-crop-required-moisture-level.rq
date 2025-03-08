@@ -1,0 +1,11 @@
+PREFIX was: <https://was-course.interactions.ics.unisg.ch/farm-ontology#>
+PREFIX hmas: <https://purl.org/hmas/>
+PREFIX td: <https://www.w3.org/2019/wot/td#>
+
+SELECT ?requiredMoistureLevel WHERE {
+GRAPH <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#> {
+   bind (<https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#crop_15ed75a1_54ee_43f3_8703_78df5b9c9aea> as ?crop)
+        ?crop a was:Crop.
+        ?crop was:requiredMoistureLevel ?requiredMoistureLevel.
+ }
+}

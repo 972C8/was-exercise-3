@@ -1,60 +1,429 @@
-@prefix ex: <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-alessandro#> .
-@prefix was: <https://was-course.interactions.ics.unisg.ch/farm-ontology#> .
-@prefix hmas: <https://purl.org/hmas/> .
-@prefix td: <https://www.w3.org/2019/wot/td#> .
-@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
-@prefix htv: <http://www.w3.org/2011/http#> .
-@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix : <https://was-course.interactions.ics.unisg.ch/farm-ontology#> .
+@prefix ex: <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#> .
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix htv: <http://www.w3.org/2011/http#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix was: <https://was-course.interactions.ics.unisg.ch/farm-ontology#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix hmas: <https://purl.org/hmas/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@base <https://was-course.interactions.ics.unisg.ch/farm-ontology#> .
 
-ex:farm-17c04810-567a-4236-b310-611bb4fd2a8c a was:Farm;
-  hmas:contains ex:tractor-34541705-7798-4a16-b76b-5fec2861e077,
-    ex:tractor-ae039570-396e-424f-9008-2142c3201b73 .
+<https://was-course.interactions.ics.unisg.ch/farm-ontology#> rdf:type owl:Ontology .
 
-ex:tractor-34541705-7798-4a16-b76b-5fec2861e077 a td:Thing, was:Tractor;
-  hmas:hasProfile <https://raw.githubusercontent.com/Interactions-HSG/example-tds/was/tds/tractor1.ttl> ;
-  td:title "A tractor that can be used for monitoring the moisture level of soil in a farm.";
-  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme];
-  td:hasBase <http://localhost:1080/api/tractors/1/>;
-  td:hasActionAffordance [ a td:ActionAffordance, was:ReadSoilMoistureAffordance;
-    td:name "Read Moisture Level";
-    td:hasForm [
-      htv:methodName "GET";
-      hctl:hasTarget <http://localhost:1080/api/tractors/1/moisture>;
-      hctl:forContentType "application/json";
-      hctl:hasOperationType td:invokeAction
-    ];
-    td:hasInputSchema [ a js:ArraySchema, was:Coordinates;
-      js:minItems "4"^^xsd:int;
-      js:maxItems "4"^^xsd:int;
-      js:items [ a js:IntegerSchema;
-        js:minimum "0"^^xsd:int;
-        js:maximum "2"^^xsd:int
-      ]
-    ];
-    td:hasOutputSchema [ a js:IntegerSchema, was:SoilMoisture ]
-  ] .
+#################################################################
+#    Annotation properties
+#################################################################
 
-ex:tractor-ae039570-396e-424f-9008-2142c3201b73 a td:Thing, was:Tractor;
-  hmas:hasProfile <https://raw.githubusercontent.com/Interactions-HSG/example-tds/was/tds/tractor2.ttl> ;
-  td:title "A tractor that can be used for irrigating sections in a farm.";
-  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme ];
-  td:hasBase <http://localhost:1080/api/tractors/2/>;
-  td:hasActionAffordance [ a td:ActionAffordance, was:IrrigateAffordance;
-    td:name "Irrigate";
-    td:hasForm [
-      htv:methodName "PUT";
-      hctl:hasTarget <http://localhost:1080/api/tractors/2/sprayer>;
-      hctl:forContentType "application/json";
-      hctl:hasOperationType td:invokeAction
-    ];
-    td:hasInputSchema [ a js:ArraySchema, was:Coordinates;
-      js:minItems "4"^^xsd:int;
-      js:maxItems "4"^^xsd:int;
-      js:items [ a js:IntegerSchema;
-        js:minimum "0"^^xsd:int;
-        js:maximum "2"^^xsd:int
-      ]
-    ]
-  ] .
+###  http://www.w3.org/2011/http#methodName
+htv:methodName rdf:type owl:AnnotationProperty .
+
+
+###  https://purl.org/hmas/contains
+hmas:contains rdf:type owl:AnnotationProperty .
+
+
+###  https://purl.org/hmas/hasProfile
+hmas:hasProfile rdf:type owl:AnnotationProperty .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#currentMoistureLevel
+was:currentMoistureLevel rdf:type owl:AnnotationProperty .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#grows
+was:grows rdf:type owl:AnnotationProperty .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#hasSoilMoisture
+was:hasSoilMoisture rdf:type owl:AnnotationProperty .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#isLocatedAt
+was:isLocatedAt rdf:type owl:AnnotationProperty .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#requiredMoistureLevel
+was:requiredMoistureLevel rdf:type owl:AnnotationProperty .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#x1
+was:x1 rdf:type owl:AnnotationProperty .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#x2
+was:x2 rdf:type owl:AnnotationProperty .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#y1
+was:y1 rdf:type owl:AnnotationProperty .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#y2
+was:y2 rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/hypermedia#forContentType
+hctl:forContentType rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/hypermedia#hasOperationType
+hctl:hasOperationType rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/hypermedia#hasTarget
+hctl:hasTarget rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/json-schema#items
+js:items rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/json-schema#maxItems
+js:maxItems rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/json-schema#maximum
+js:maximum rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/json-schema#minItems
+js:minItems rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/json-schema#minimum
+js:minimum rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/td#hasActionAffordance
+td:hasActionAffordance rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/td#hasBase
+td:hasBase rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/td#hasForm
+td:hasForm rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/td#hasInputSchema
+td:hasInputSchema rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/td#hasOutputSchema
+td:hasOutputSchema rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/td#hasSecurityConfiguration
+td:hasSecurityConfiguration rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/td#name
+td:name rdf:type owl:AnnotationProperty .
+
+
+###  https://www.w3.org/2019/wot/td#title
+td:title rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#Coordinates
+was:Coordinates rdf:type owl:Class .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#Corn
+was:Corn rdf:type owl:Class .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#Crop
+was:Crop rdf:type owl:Class .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#Farm
+was:Farm rdf:type owl:Class .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#IrrigateAffordance
+was:IrrigateAffordance rdf:type owl:Class .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#ReadSoilMoistureAffordance
+was:ReadSoilMoistureAffordance rdf:type owl:Class .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#Section
+was:Section rdf:type owl:Class .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#SoilMoisture
+was:SoilMoisture rdf:type owl:Class .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#Tractor
+was:Tractor rdf:type owl:Class .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#Wheat
+was:Wheat rdf:type owl:Class .
+
+
+###  https://www.w3.org/2019/wot/json-schema#ArraySchema
+js:ArraySchema rdf:type owl:Class .
+
+
+###  https://www.w3.org/2019/wot/json-schema#IntegerSchema
+js:IntegerSchema rdf:type owl:Class .
+
+
+###  https://www.w3.org/2019/wot/security#NoSecurityScheme
+wotsec:NoSecurityScheme rdf:type owl:Class .
+
+
+###  https://www.w3.org/2019/wot/td#ActionAffordance
+td:ActionAffordance rdf:type owl:Class .
+
+
+###  https://www.w3.org/2019/wot/td#Thing
+td:Thing rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#coordinates_5ae199e3_7dbc_4dec_8ccc_cd72b13afa3e
+ex:coordinates_5ae199e3_7dbc_4dec_8ccc_cd72b13afa3e rdf:type owl:NamedIndividual ,
+                                                             was:Coordinates ,
+                                                             td:Thing ;
+                                                    rdfs:label "coordinates"@en ;
+                                                    was:x1 0 ;
+                                                    was:x2 1 ;
+                                                    was:y1 0 ;
+                                                    was:y2 1 ;
+                                                    td:hasBase "http://localhost:1080/api/coordinates/1/" ;
+                                                    td:title "A set of 4 coordinates [X1,Y1,X2,Y2] that define the opposite corners of a square section at points [X1,Y1] and [X2,Y2]." .
+
+
+###  https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#farm-17c04810-567a-4236-b310-611bb4fd2a8c
+ex:farm-17c04810-567a-4236-b310-611bb4fd2a8c rdf:type owl:NamedIndividual ,
+                                                      was:Farm ;
+                                             hmas:contains ex:tractor-34541705-7798-4a16-b76b-5fec2861e077 ,
+                                                           ex:tractor-ae039570-396e-424f-9008-2142c3201b73 ,
+                                                           was:section_02a2b3ac_8934_407b_a032_bccb401ca816 ,
+                                                           was:section_52d7876d_158f_40d6_a941_294f3a352646 ,
+                                                           was:section_5f49f2c1_bcab_419f_8321_51e2ead5e988 ,
+                                                           was:section_cc23fba5_2452_426c_a605_077a3ddea3dd .
+
+
+###  https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#tractor-34541705-7798-4a16-b76b-5fec2861e077
+ex:tractor-34541705-7798-4a16-b76b-5fec2861e077 rdf:type owl:NamedIndividual ,
+                                                         was:Tractor ,
+                                                         td:Thing ;
+                                                hmas:hasProfile <https://raw.githubusercontent.com/Interactions-HSG/example-tds/was/tds/tractor1.ttl> ;
+                                                td:hasActionAffordance [ rdf:type was:ReadSoilMoistureAffordance ,
+                                                                                  td:ActionAffordance ;
+                                                                         td:hasForm [ htv:methodName "GET" ;
+                                                                                      hctl:forContentType "application/json" ;
+                                                                                      hctl:hasOperationType td:invokeAction ;
+                                                                                      hctl:hasTarget <http://localhost:1080/api/tractors/1/moisture>
+                                                                                    ] ;
+                                                                         td:hasInputSchema [ rdf:type was:Coordinates ,
+                                                                                                      js:ArraySchema ;
+                                                                                             js:items [ rdf:type js:IntegerSchema ;
+                                                                                                        js:maximum "2"^^xsd:int ;
+                                                                                                        js:minimum "0"^^xsd:int
+                                                                                                      ] ;
+                                                                                             js:maxItems "4"^^xsd:int ;
+                                                                                             js:minItems "4"^^xsd:int
+                                                                                           ] ;
+                                                                         td:hasOutputSchema [ rdf:type was:SoilMoisture ,
+                                                                                                       js:IntegerSchema
+                                                                                            ] ;
+                                                                         td:name "Read Moisture Level"
+                                                                       ] ;
+                                                td:hasBase <http://localhost:1080/api/tractors/1/> ;
+                                                td:hasSecurityConfiguration [ rdf:type wotsec:NoSecurityScheme
+                                                                            ] ;
+                                                td:title "A tractor that can be used for monitoring the moisture level of soil in a farm." .
+
+
+###  https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#tractor-ae039570-396e-424f-9008-2142c3201b73
+ex:tractor-ae039570-396e-424f-9008-2142c3201b73 rdf:type owl:NamedIndividual ,
+                                                         was:Tractor ,
+                                                         td:Thing ;
+                                                hmas:hasProfile <https://raw.githubusercontent.com/Interactions-HSG/example-tds/was/tds/tractor2.ttl> ;
+                                                td:hasActionAffordance [ rdf:type was:IrrigateAffordance ,
+                                                                                  td:ActionAffordance ;
+                                                                         td:hasForm [ htv:methodName "PUT" ;
+                                                                                      hctl:forContentType "application/json" ;
+                                                                                      hctl:hasOperationType td:invokeAction ;
+                                                                                      hctl:hasTarget <http://localhost:1080/api/tractors/2/sprayer>
+                                                                                    ] ;
+                                                                         td:hasInputSchema [ rdf:type was:Coordinates ,
+                                                                                                      js:ArraySchema ;
+                                                                                             js:items [ rdf:type js:IntegerSchema ;
+                                                                                                        js:maximum "2"^^xsd:int ;
+                                                                                                        js:minimum "0"^^xsd:int
+                                                                                                      ] ;
+                                                                                             js:maxItems "4"^^xsd:int ;
+                                                                                             js:minItems "4"^^xsd:int
+                                                                                           ] ;
+                                                                         td:name "Irrigate"
+                                                                       ] ;
+                                                td:hasBase <http://localhost:1080/api/tractors/2/> ;
+                                                td:hasSecurityConfiguration [ rdf:type wotsec:NoSecurityScheme
+                                                                            ] ;
+                                                td:title "A tractor that can be used for irrigating sections in a farm." .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#coordinates_41472442_f285_492f_8863_9b9066cb2e89
+was:coordinates_41472442_f285_492f_8863_9b9066cb2e89 rdf:type owl:NamedIndividual ,
+                                                              was:Coordinates ,
+                                                              td:Thing ;
+                                                     rdfs:label "coordinates"@en ;
+                                                     was:x1 1 ;
+                                                     was:x2 2 ;
+                                                     was:y1 1 ;
+                                                     was:y2 2 ;
+                                                     td:hasBase "http://localhost:1080/api/coordinates/4/" ;
+                                                     td:title "A set of 4 coordinates [X1,Y1,X2,Y2] that define the opposite corners of a square section at points [X1,Y1] and [X2,Y2]." .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#coordinates_e2c57dea_90ad_424d_85e5_e73433035139
+was:coordinates_e2c57dea_90ad_424d_85e5_e73433035139 rdf:type owl:NamedIndividual ,
+                                                              was:Coordinates ,
+                                                              td:Thing ;
+                                                     rdfs:label "coordinates"@en ;
+                                                     was:x1 0 ;
+                                                     was:x2 1 ;
+                                                     was:y1 1 ;
+                                                     was:y2 2 ;
+                                                     td:hasBase "http://localhost:1080/api/coordinates/3/" ;
+                                                     td:title "A set of 4 coordinates [X1,Y1,X2,Y2] that define the opposite corners of a square section at points [X1,Y1] and [X2,Y2]." .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#coordinates_eec00076_d9e2_43b5_b597_b2b6fe078c53
+was:coordinates_eec00076_d9e2_43b5_b597_b2b6fe078c53 rdf:type owl:NamedIndividual ,
+                                                              was:Coordinates ,
+                                                              td:Thing ;
+                                                     rdfs:label "coordinates"@en ;
+                                                     was:x1 1 ;
+                                                     was:x2 2 ;
+                                                     was:y1 0 ;
+                                                     was:y2 1 ;
+                                                     td:hasBase "http://localhost:1080/api/coordinates/2/" ;
+                                                     td:title "A set of 4 coordinates [X1,Y1,X2,Y2] that define the opposite corners of a square section at points [X1,Y1] and [X2,Y2]." .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#crop_15ed75a1_54ee_43f3_8703_78df5b9c9aea
+was:crop_15ed75a1_54ee_43f3_8703_78df5b9c9aea rdf:type owl:NamedIndividual ,
+                                                       was:Crop ,
+                                                       was:Wheat ;
+                                              rdfs:label "wheat"@en ;
+                                              was:requiredMoistureLevel 120 ;
+                                              td:title "A crop of the type wheat." .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#crop_5534be61_c710_4e22_8804_bcea112f9e91
+was:crop_5534be61_c710_4e22_8804_bcea112f9e91 rdf:type owl:NamedIndividual ,
+                                                       was:Corn ,
+                                                       was:Crop ;
+                                              rdfs:label "corn"@en ;
+                                              was:requiredMoistureLevel 80 ;
+                                              td:title "A crop of the type corn." .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#section_02a2b3ac_8934_407b_a032_bccb401ca816
+was:section_02a2b3ac_8934_407b_a032_bccb401ca816 rdf:type owl:NamedIndividual ,
+                                                          was:Section ,
+                                                          td:Thing ;
+                                                 rdfs:label "section"@en ;
+                                                 was:grows was:crop_15ed75a1_54ee_43f3_8703_78df5b9c9aea ;
+                                                 was:hasSoilMoisture was:soilMoisture_c44ddfc1_c61b_433d_bbc6_ec82729f9bcf ;
+                                                 was:isLocatedAt ex:coordinates_5ae199e3_7dbc_4dec_8ccc_cd72b13afa3e ;
+                                                 td:hasBase <http://localhost:1080/api/sections/1/> ;
+                                                 td:title "A section of the farm" .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#section_52d7876d_158f_40d6_a941_294f3a352646
+was:section_52d7876d_158f_40d6_a941_294f3a352646 rdf:type owl:NamedIndividual ,
+                                                          was:Section ,
+                                                          td:Thing ;
+                                                 rdfs:label "section"@en ;
+                                                 was:grows was:crop_15ed75a1_54ee_43f3_8703_78df5b9c9aea ;
+                                                 was:hasSoilMoisture was:soilMoisture_e0687568_635d_4ff4_aad0_933b3abb7f38 ;
+                                                 was:isLocatedAt was:coordinates_eec00076_d9e2_43b5_b597_b2b6fe078c53 ;
+                                                 td:hasBase <http://localhost:1080/api/sections/2/> ;
+                                                 td:title "A section of the farm" .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#section_5f49f2c1_bcab_419f_8321_51e2ead5e988
+was:section_5f49f2c1_bcab_419f_8321_51e2ead5e988 rdf:type owl:NamedIndividual ,
+                                                          was:Section ,
+                                                          td:Thing ;
+                                                 rdfs:label "section"@en ;
+                                                 was:grows was:crop_5534be61_c710_4e22_8804_bcea112f9e91 ;
+                                                 was:hasSoilMoisture was:soilMoisture_87076505_7826_47f6_a9ba_e949e28015a7 ;
+                                                 was:isLocatedAt was:coordinates_e2c57dea_90ad_424d_85e5_e73433035139 ;
+                                                 td:hasBase <http://localhost:1080/api/sections/3/> ;
+                                                 td:title "A section of the farm" .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#section_cc23fba5_2452_426c_a605_077a3ddea3dd
+was:section_cc23fba5_2452_426c_a605_077a3ddea3dd rdf:type owl:NamedIndividual ,
+                                                          was:Section ,
+                                                          td:Thing ;
+                                                 rdfs:label "section"@en ;
+                                                 was:grows was:crop_5534be61_c710_4e22_8804_bcea112f9e91 ;
+                                                 was:hasSoilMoisture was:soilMoisture_2f6abfbf_a8a6_461a_a2e3_45544c6d338a ;
+                                                 was:isLocatedAt was:coordinates_41472442_f285_492f_8863_9b9066cb2e89 ;
+                                                 td:hasBase <http://localhost:1080/api/sections/4/> ;
+                                                 td:title "A section of the farm" .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#soilMoisture_2f6abfbf_a8a6_461a_a2e3_45544c6d338a
+was:soilMoisture_2f6abfbf_a8a6_461a_a2e3_45544c6d338a rdf:type owl:NamedIndividual ,
+                                                               was:SoilMoisture ;
+                                                      rdfs:label "soilMoisture"@en ;
+                                                      was:currentMoistureLevel 80 ;
+                                                      td:hasBase <http://localhost:1080/api/soilMoisture/4/> ;
+                                                      td:title "The level of moisture in soil." .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#soilMoisture_87076505_7826_47f6_a9ba_e949e28015a7
+was:soilMoisture_87076505_7826_47f6_a9ba_e949e28015a7 rdf:type owl:NamedIndividual ,
+                                                               was:SoilMoisture ;
+                                                      rdfs:label "soilMoisture"@en ;
+                                                      was:currentMoistureLevel 80 ;
+                                                      td:hasBase <http://localhost:1080/api/soilMoisture/3/> ;
+                                                      td:title "The level of moisture in soil." .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#soilMoisture_c44ddfc1_c61b_433d_bbc6_ec82729f9bcf
+was:soilMoisture_c44ddfc1_c61b_433d_bbc6_ec82729f9bcf rdf:type owl:NamedIndividual ,
+                                                               was:SoilMoisture ;
+                                                      rdfs:label "soilMoisture"@en ;
+                                                      was:currentMoistureLevel 120 ;
+                                                      td:hasBase <http://localhost:1080/api/soilMoisture/1/> ;
+                                                      td:title "The level of moisture in soil." .
+
+
+###  https://was-course.interactions.ics.unisg.ch/farm-ontology#soilMoisture_e0687568_635d_4ff4_aad0_933b3abb7f38
+was:soilMoisture_e0687568_635d_4ff4_aad0_933b3abb7f38 rdf:type owl:NamedIndividual ,
+                                                               was:SoilMoisture ;
+                                                      rdfs:label "soilMoisture"@en ;
+                                                      was:currentMoistureLevel 120 ;
+                                                      td:hasBase <http://localhost:1080/api/soilMoisture/2/> ;
+                                                      td:title "The level of moisture in soil." .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
