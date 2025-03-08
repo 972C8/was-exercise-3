@@ -33,10 +33,10 @@ INSERT {
             was:grows ?corn;
 				was:hasSoilMoisture ?moisture4.
 
-        ?farm hmas:contains ?section1.
-        ?farm hmas:contains ?section2.
-        ?farm hmas:contains ?section3.
-        ?farm hmas:contains ?section4.
+        ?farm was:owns ?section1.
+        ?farm was:owns ?section2.
+        ?farm was:owns ?section3.
+        ?farm was:owns ?section4.
     }.
 } WHERE {
 	?farm a was:Farm.
