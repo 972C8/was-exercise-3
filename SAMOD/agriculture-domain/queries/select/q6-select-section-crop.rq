@@ -2,7 +2,7 @@ PREFIX was: <https://was-course.interactions.ics.unisg.ch/farm-ontology#>
 
 SELECT ?crop WHERE {
 GRAPH <https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#> {
-   bind (<https://sandbox-graphdb.interactions.ics.unisg.ch/was-exercise-3-tibor#section_02a2b3ac_8934_407b_a032_bccb401ca816> as ?section)
+   bind (<https://was-course.interactions.ics.unisg.ch/farm-ontology#section_02a2b3ac_8934_407b_a032_bccb401ca816> as ?section)
    ?section a was:Section.
    ?section was:grows ?crop.
  }
