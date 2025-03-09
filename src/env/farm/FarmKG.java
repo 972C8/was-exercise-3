@@ -77,6 +77,8 @@ public class FarmKG extends Artifact {
 
     @OPERATION
     public void queryThing(String farm, String offeredAffordance, OpFeedbackParam<String> thingDescription) {
+        System.out.println("Querying thing");
+        
         // the variable where we will store the result to be returned to the agent
         String tdValue = null;
 
@@ -85,7 +87,7 @@ public class FarmKG extends Artifact {
 
         // constructs query
         String queryStr = PREFIXES + "SELECT ?" + tdVariableName + " WHERE {\n" +
-                "<" + farm + "> hmas:contains ?thing.\n" +
+                "<" + farm + "> was:owns ?thing.\n" +
                 "?thing td:hasActionAffordance ?aff.\n" +
                 "?thing hmas:hasProfile ?" + tdVariableName + ".\n" +
                 "?aff a <" + offeredAffordance + ">.} LIMIT 1";
