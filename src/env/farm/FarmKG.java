@@ -20,8 +20,8 @@ import com.google.gson.JsonObject;
 
 public class FarmKG extends Artifact {
 
-    private static final String USERNAME = "danai";
-    private static final String PASSWORD = "danai24";
+    private static final String USERNAME = "tibor";
+    private static final String PASSWORD = "tibor24";
 
     private String repoLocation;
 
@@ -236,13 +236,13 @@ public class FarmKG extends Artifact {
             URI uri = new URI(queryUrl);
 
             // TODO: Re-enable authentication when GraphDB repositor
-            // String authString = USERNAME + ":" + PASSWORD;
-            // byte[] authBytes = authString.getBytes(StandardCharsets.UTF_8);
-            // String encodedAuth = Base64.getEncoder().encodeToString(authBytes);
+             String authString = USERNAME + ":" + PASSWORD;
+             byte[] authBytes = authString.getBytes(StandardCharsets.UTF_8);
+             String encodedAuth = Base64.getEncoder().encodeToString(authBytes);
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(uri)
-                    // .header("Authorization", "Basic " + encodedAuth)
+                    .header("Authorization", "Basic " + encodedAuth)
                     .header("Accept", "application/sparql-results+json")
                     .GET()
                     .build();
